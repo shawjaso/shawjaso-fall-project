@@ -1,0 +1,13 @@
+%html
+  %head
+  %body
+    %h2 List of friends
+
+    %form(action="/set_urls" method="POST")
+      - @friends_hash.each do |uid, name|
+        %br
+        %input(type="checkbox" name="#{uid}" value="#{uid}" )
+          #{name}
+      %br
+      %input(type = "submit" value = "Send" class = "button")
+        
