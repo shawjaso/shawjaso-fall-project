@@ -6,7 +6,7 @@
     %form(action="/set_urls" method="POST")
       - @friends_hash.each do |uid, name|
         %br
-        %input(type="checkbox" name="#{uid}" value="#{uid}" )
+        %input(type="checkbox" name="friend[]" value="#{uid}" )
           #{name}
       %br
       %input(type = "submit" value = "Send" class = "button")

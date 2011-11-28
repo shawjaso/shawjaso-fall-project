@@ -48,6 +48,7 @@ get '/' do
 
   @app = Mogli::Application.find(ENV["FACEBOOK_APP_ID"], @client)
   @user = Mogli::User.find("me", @client)
+  # TODO Add user to db
 
   @friends_hash = Hash.new
   @friends_query = @client.fql_query("SELECT uid, name FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me())")
@@ -85,6 +86,11 @@ end
 
 
 post '/set_urls' do
-  # TODO: Obtain links
+  friends = params["friend"]
+  # TODO Get owner
+  if friends.nil? or friends.count == 0
+    redirect '/'
+  end
+  # TODO Write friends to db
 end
 

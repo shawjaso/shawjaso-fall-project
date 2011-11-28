@@ -2,8 +2,9 @@ class CreateLinks < ActiveRecord::Migration
 
   def change
     create_table :links do |t|
-      t.string :link_id
-      t.string :poster_id
+      t.integer :link_id, :options => 'PRIMARY KEY'
+      t.references :owner_id
+      t.boolean :enabled
       t.string :auth_url
       t.string :unauth_url
       t.timestamps
