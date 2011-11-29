@@ -41,35 +41,6 @@ error(Mogli::Client::HTTPException) do
 end
 
 
-get '/' do
-  redirect "/auth/facebook" unless session[:at]
-  @client = Mogli::Client.new(session[:at])
-
-  @client.default_params[:limit] = 15
-
-  @app = Mogli::Application.find(ENV["FACEBOOK_APP_ID"], @client)
-  @user = Mogli::User.find("me", @client)
-
-  @db_user = Owner.find_by_fb_id(@user.id)
-  if @db_user.nil? == true
-    @db_user = Owner.new
-    @db_user.name = @user.name
-    @db_user.fb_id = @user.id
-    @db_user.save
-  end
-
-  @friends_hash = Hash.new
-  @friends_query = @client.fql_query("SELECT uid, name FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me())")
-  @friends_query.each do |result|
-    @friends_hash[result["uid"]] = result["name"]
-  end
-
-  # TODO: Add code to sort hash
-  #@friends_hash.sort {|uid,name| uid[1]<=>name[1]}
-  haml :select_friends 
-end
-
-
 post '/' do
   redirect "/"
 end
@@ -167,5 +138,34 @@ get '/fwlink/:link_id' do
   else
     redirect link.auth_url
   end
+end
+
+
+get '/' do
+  redirect "/auth/facebook" unless session[:at]
+  @client = Mogli::Client.new(session[:at])
+
+  @client.default_params[:limit] = 15
+
+  @app = Mogli::Application.find(ENV["FACEBOOK_APP_ID"], @client)
+  @user = Mogli::User.find("me", @client)
+
+  @db_user = Owner.find_by_fb_id(@user.id)
+  if @db_user.nil? == true
+    @db_user = Owner.new
+    @db_user.name = @user.name
+    @db_user.fb_id = @user.id
+    @db_user.save
+  end
+
+  @friends_hash = Hash.new
+  @friends_query = @client.fql_query("SELECT uid, name FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me())")
+  @friends_query.each do |result|
+    @friends_hash[result["uid"]] = result["name"]
+  end
+
+  # TODO: Add code to sort hash
+  #@friends_hash.sort {|uid,name| uid[1]<=>name[1]}
+  haml :select_friends 
 end
 
