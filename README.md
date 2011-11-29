@@ -13,20 +13,20 @@ My goal was to implement this using Ruby on Heroku to handle the backend logic a
 ## Workflow
 
 The Link Owner - The person creating the link
- 1. Comes to the site and authenticates with their Facebook account.
- 2. Once authenticated the user's friends will be listed allowing them to check which ones they want to authorize.
- 3. They enter a URL for authorized users and another for unauthorized users.
- 4. The link is generated and ready for use.
+ * Comes to the site and authenticates with their Facebook account.
+ * Once authenticated the user's friends will be listed allowing them to check which ones they want to authorize.
+ * They enter a URL for authorized users and another for unauthorized users.
+ * The link is generated and ready for use.
 
 Authorized User
- 1. Clicks on the link.
- 2. Asked to authenticate with their Facebook account.
- 3. Once authenticated, they are redirected to the URL for authorized users.
+ * Clicks on the link.
+ * Asked to authenticate with their Facebook account.
+ * Once authenticated, they are redirected to the URL for authorized users.
 
 Unauthorized User
- 1. Clicks on the link.
- 2. Asked to authenticate with with Facebook account.
- 3. Once authenticated, they are redirected to the URL for unauthorized users.
+ * Clicks on the link.
+ * Asked to authenticate with with Facebook account.
+ * Once authenticated, they are redirected to the URL for unauthorized users.
 
 
 ## What I learned
@@ -56,9 +56,9 @@ From what I've seen so far, Heroku is a great service! The have things pretty do
 
  - I would have really like to have created a better user intrface, but there were so many little things that stopped me dead in my tracks while trying to write this that I was never able to improve it.
 
-  - Currently this app is in a VERY alpha stage. There's no SQL scrubbing, serious error checking, and there could probably be better logging to help with debugging. In general the app could be setup better to move from the local machines to production. I don't think this would be difficult to implement, but since it was the last stage of the project, I had no time to improve it.
+ - Currently this app is in a VERY alpha stage. There's no SQL scrubbing, serious error checking, and there could probably be better logging to help with debugging. In general the app could be setup better to move from the local machines to production. I don't think this would be difficult to implement, but since it was the last stage of the project, I had no time to improve it.
 
 ### Things learned
  
- Never think you're going to write an app using new technology in a short period.
+Never think you're going to write an app using new technology in a short period.
 
