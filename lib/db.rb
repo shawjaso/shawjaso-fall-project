@@ -8,7 +8,7 @@ db_config = YAML::load(File.open(db_config_file))
 ActiveRecord::Base.establish_connection db_config
 
 # Setting up logger
-ActiveRecord::Base.logger = Logger.new(File.open('db.log', 'a'))
+#ActiveRecord::Base.logger = Logger.new(File.open('db.log', 'a'))
 
 require_relative 'owner'
 require_relative 'friend'
