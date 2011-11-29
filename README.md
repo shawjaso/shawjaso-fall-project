@@ -13,21 +13,20 @@ My goal was to implement this using Ruby on Heroku to handle the backend logic a
 ## Workflow
 
 The Link Owner - The person creating the link
- * Comes to the site and authenticates with their Facebook account.
- * Once authenticated the user's friends will be listed allowing them to check which ones they want to authorize.
- * They enter a URL for authorized users and another for unauthorized users.
- * The link is generated and ready for use.
+1. Comes to the site and authenticates with their Facebook account.
+1. Once authenticated the user's friends will be listed allowing them to check which ones they want to authorize.
+1. They enter a URL for authorized users and another for unauthorized users.
+1. The link is generated and ready for use.
 
 Authorized User
- * Clicks on the link.
- * Asked to authenticate with their Facebook account.
- * Once authenticated, they are redirected to the URL for authorized users.
+1. Clicks on the link.
+1. Asked to authenticate with their Facebook account.
+1. Once authenticated, they are redirected to the URL for authorized users.
 
 Unauthorized User
- * Clicks on the link.
- * Asked to authenticate with with Facebook account.
- * Once authenticated, they are redirected to the URL for unauthorized users.
-
+1. * Clicks on the link.
+1. * Asked to authenticate with with Facebook account.
+1. * Once authenticated, they are redirected to the URL for unauthorized users.
 
 ## What I learned
 
