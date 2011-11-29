@@ -27,12 +27,12 @@ end
 task :environment do
 
   # Loading db config file
-  db_config_file = YAML::load(File.open('db_config.yml'))
+  db_config_file = YAML::load(File.open('database.yml'))
 
   # Connection to db
   ActiveRecord::Base.establish_connection db_config_file
 
   # Setting up loggin
-  ActiveRecord::Base.logger = Logger.new(File.open('db.log', 'a'))
+  #ActiveRecord::Base.logger = Logger.new(File.open('db.log', 'a'))
 
 end
