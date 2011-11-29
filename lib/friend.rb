@@ -1,8 +1,8 @@
 class Friend < ActiveRecord::Base
 
-  validates :friend_fb_id, :friend_name, :presence => true
-
-  belongs_to :owner_id
+  validates :owner_id, :fb_id, :presence => true
+  has_many :links, :through => :permissions
+  belongs_to :owner
 
 end
 

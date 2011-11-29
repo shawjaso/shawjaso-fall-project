@@ -1,0 +1,16 @@
+%html
+  %head
+  %body
+    %h2 Set the URLs
+
+    %form(action="/completed" method="POST")
+      %input(type="hidden" name="owner_id" value="#{@owner_id}")
+      - @friend_array.each do |f|
+        %input(type="hidden" name="friend_id[]" value="#{f}")
+      %b Authorized:
+      %input(type="text" name="auth_url")
+      %br
+      %b Unauthorized:
+      %input(type="text" name="unauth_url")
+      %input(type="submit" value="Send" class="button")
+

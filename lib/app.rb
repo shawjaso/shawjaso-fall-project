@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'mogli'
 require 'haml'
+require_relative 'db'
 
 enable :sessions
 set :raise_errors, true
@@ -48,7 +49,14 @@ get '/' do
 
   @app = Mogli::Application.find(ENV["FACEBOOK_APP_ID"], @client)
   @user = Mogli::User.find("me", @client)
-  # TODO Add user to db
+
+  @db_user = Owner.find_by_fb_id(@user.id)
+  if @db_user.nil? == true
+    @db_user = Owner.new
+    @db_user.name = @user.name
+    @db_user.fb_id = @user.id
+    @db_user.save
+  end
 
   @friends_hash = Hash.new
   @friends_query = @client.fql_query("SELECT uid, name FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me())")
@@ -86,11 +94,78 @@ end
 
 
 post '/set_urls' do
+  @owner_id = params["owner_id"]
   friends = params["friend"]
-  # TODO Get owner
   if friends.nil? or friends.count == 0
     redirect '/'
   end
-  # TODO Write friends to db
+  @friend_array = Array.new
+  friends.each do |f|
+    friend_result = Friend.where("fb_id = ? AND owner_id = ?", f, @owner_id)
+    friend = Friend.new
+    if friend_result.nil? == true or friend_result.count == 0
+      friend.fb_id = f
+      friend.owner_id = @owner_id
+      friend.save
+    else 
+      friend = friend_result[0]
+    end
+    @friend_array << friend.id
+  end
+
+  haml :set_urls
+end
+
+
+post '/completed' do
+    owner_id = params["owner_id"]
+    friend_ids = params["friend_id"]
+    auth_url = params["auth_url"]
+    unauth_url = params["unauth_url"]
+
+    @link = Link.new
+    @link.owner_id = owner_id
+    @link.auth_url = auth_url
+    @link.unauth_url = unauth_url
+    @link.save
+
+    friend_ids.each do |friend_id|
+      permission = Permission.new
+      permission.link_id = @link.id
+      permission.friend_id = friend_id
+      permission.save
+    end
+
+    haml :completed
+end
+
+
+get '/fwlink/:link_id' do
+  redirect "/auth/facebook" unless session[:at]
+  @client = Mogli::Client.new(session[:at])
+
+  @client.default_params[:limit] = 15
+
+  @app = Mogli::Application.find(ENV["FACEBOOK_APP_ID"], @client)
+  @user = Mogli::User.find("me", @client)
+
+  link_id = params[:link_id]
+  link = Link.find(link_id)
+  friend = Friend.find_by_fb_id(@user.id) 
+  if friend.nil?
+    owner = Owner.find_by_fb_id(@user.id)
+    if owner.nil?
+      redirect link.unauth_url
+    else
+      redirect link.auth_url
+    end
+  end
+
+  permissions = Permissions.where("link_id = ? AND friend_id = ?", link_id, friend.id)
+  if permissions.nil? or permissions.count != 1
+    redirect link.unauth_url
+  else
+    redirect link.auth_url
+  end
 end
 

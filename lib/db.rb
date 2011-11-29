@@ -10,7 +10,8 @@ ActiveRecord::Base.establish_connection db_config
 # Setting up logger
 ActiveRecord::Base.logger = Logger.new(File.open('db.log', 'a'))
 
-require_relative 'users'
-require_relative 'friends'
-require_relative 'links'
+require_relative 'owner'
+require_relative 'friend'
+require_relative 'link'
+require_relative 'permission'
 

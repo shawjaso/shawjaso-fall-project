@@ -4,9 +4,10 @@
     %h2 List of friends
 
     %form(action="/set_urls" method="POST")
+      %input(type="hidden" name="owner_id" value="#{@db_user.id}")
       - @friends_hash.each do |uid, name|
         %br
-        %input(type="checkbox" name="friend[]" value="#{uid}" )
+        %input(type="checkbox" name="friend[]" value="#{uid}")
           #{name}
       %br
       %input(type = "submit" value = "Send" class = "button")
