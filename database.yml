@@ -1,7 +1,7 @@
 encoding: unicode
 adapter: postgresql
-username: username
+username: lnhwglhhif
 port: 5432
-host: hostname
-database: database
-password: password
+host: ec2-107-22-213-155.compute-1.amazonaws.com
+database: lnhwglhhif
+password: knj3kHChhJCFtAlhh41U
