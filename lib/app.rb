@@ -5,7 +5,7 @@ require_relative 'db'
 
 enable :sessions
 set :raise_errors, true
-set :show_exceptions, true
+set :show_exceptions, false
 
 FACEBOOK_SCOPE = ''
 
