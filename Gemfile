@@ -2,7 +2,6 @@ source :rubygems
 
 gem 'rake'
 gem 'activerecord'
-gem 'sqlite3'
 gem 'sinatra'
 gem 'mogli'
 gem 'thin'
