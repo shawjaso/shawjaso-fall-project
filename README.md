@@ -27,9 +27,9 @@ Authorized User
 
 Unauthorized User
 
-1. * Clicks on the link.
-1. * Asked to authenticate with with Facebook account.
-1. * Once authenticated, they are redirected to the URL for unauthorized users.
+1. Clicks on the link.
+1. Asked to authenticate with with Facebook account.
+1. Once authenticated, they are redirected to the URL for unauthorized users.
 
 ## What I learned
 
