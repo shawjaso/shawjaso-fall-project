@@ -1,8 +1,7 @@
-production: 
-  encoding: unicode
-  adapter: postgresql
-  username: username
-  port: 5432
-  host: hostname
-  database: database
-  password: password
+encoding: unicode
+adapter: postgresql
+username: username
+port: 5432
+host: hostname
+database: database
+password: password
