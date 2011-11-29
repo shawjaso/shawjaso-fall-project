@@ -6,6 +6,9 @@ gem 'sinatra'
 gem 'mogli'
 gem 'thin'
 gem 'haml'
+gem 'pg'
+gem 'heroku'
+gem 'rails'
 
 group :test do
   gem 'rspec'
