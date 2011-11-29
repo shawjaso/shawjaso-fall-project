@@ -4,4 +4,4 @@
     %h2 Completed!
 
     Here is your link
-    %b http://#{request.host_with_port}/fwlink/#{@link.id}
+    %b #{request.scheme}://#{request.env['HTTP_HOST']}/fwlink/#{@link.id}
